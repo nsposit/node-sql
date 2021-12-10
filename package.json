@@ -1,0 +1,23 @@
+{
+  "name": "@nathaniel.sposit/sql",
+  "version": "1.0.0",
+  "description": "Node package for mySQL",
+  "main": "/lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node /test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@code.survice.com:nate.sposit/node-sql.git"
+  },
+  "author": "nathaniel.sposit",
+  "license": "ISC",
+  "dependencies": {
+    "joi": "^17.5.0",
+    "mysql2": "^2.3.3"
+  }
+}
