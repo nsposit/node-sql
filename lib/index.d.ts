@@ -9,8 +9,9 @@ constructor(host: string,
     queueLimit?: number,
     debug?: boolean); 
 
-    checkConnection(): Promise<boolean>
+    checkConnection(): Promise<boolean>;
     query(sql: string, values: any): Promise<mysql.RowDataPacket[] | mysql.RowDataPacket[][] | mysql.OkPacket | mysql.OkPacket[] | mysql.ResultSetHeader>
+    closePool(): Promise<void>;
 }
 
 export interface Column {
@@ -41,6 +42,11 @@ export declare class Table {
     findOne(id: number): Promise<typeof Schema>; 
     findOneBy(key: string, value: any): Promise<typeof Schema>; 
     create(obj: any): Promise<typeof Schema>; 
+    updateOne(id: number, obj: any): Promise<typeof Schema>;
+    updateOneBy(key: string, value: any, obj: any): Promise<typeof Schema>;
+    deleteOne(id: number): Promise<boolean>;
+    deleteOneBy(key: string, value: any): Promise<boolean>;
+    deleteOneByWhere(key1: string, value1: any, key2: string, value2: any): Promise<boolean>;
     
 }
 
