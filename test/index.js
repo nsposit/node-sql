@@ -1,8 +1,9 @@
+require('dotenv').config(); 
 const sql = require("../lib/index");
 const showResult = false;
 
 // create db connection
-const db = new sql.Database("localhost", "root", "", "dsiac_iss");
+const db = new sql.Database(process.env.DB_HOST, process.env.DB_USER, process.env.DB_PASS, process.env.DB_NAME);
 
 //create table
 const tbl = new sql.Table(db, "member_tbl", {
