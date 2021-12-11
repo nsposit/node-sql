@@ -1,9 +1,14 @@
-require('dotenv').config(); 
+require("dotenv").config();
 const sql = require("../lib/index");
 const showResult = false;
 
 // create db connection
-const db = new sql.Database(process.env.DB_HOST, process.env.DB_USER, process.env.DB_PASS, process.env.DB_NAME);
+const db = new sql.Database(
+  process.env.DB_HOST,
+  process.env.DB_USER,
+  process.env.DB_PASS,
+  process.env.DB_NAME
+);
 
 //create table
 const tbl = new sql.Table(db, "member_tbl", {
@@ -187,14 +192,14 @@ async function run() {
     }
     console.log("Unit test 'create test user 2' passed.");
 
-     // create test user 3
-     console.log("Starting unit test 'create test user 3'...");
-     const testUser3Created = await testCreate(user3);
-     if (!testUser3Created) {
-       console.error("Unit test 'create test user 3' failed.");
-       return;
-     }
-     console.log("Unit test 'create test user 3' passed.");
+    // create test user 3
+    console.log("Starting unit test 'create test user 3'...");
+    const testUser3Created = await testCreate(user3);
+    if (!testUser3Created) {
+      console.error("Unit test 'create test user 3' failed.");
+      return;
+    }
+    console.log("Unit test 'create test user 3' passed.");
 
     // find test user 1
     console.log("Starting unit test 'find test user 1'...");
