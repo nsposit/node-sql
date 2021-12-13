@@ -34,13 +34,14 @@ const db = new sql.Database(
 );
 
 // create table model
-const tbl = new sql.Table(db, "example_tbl", {
+tableName = "foo"; 
+const tbl = new sql.Table(db, tableName, {
   id: {
     type: "int",
     isPrimaryKey: true,
     autoIncrement: true,
   },
-  field: {
+  foo: {
     type: "varchar(256)",
   },
   created: {
@@ -49,15 +50,25 @@ const tbl = new sql.Table(db, "example_tbl", {
 });
 ```
 
-Performing a SELECT operation (with WHERE and ORDER BY)
+Performing an INSERT operation
 
 ```javascript
+  const { id } = await tbl.insert({ foo: "bar" });
+
+  // expect: id = 1;
+```
+
+Performing a SELECT operation
+
+```javascript
+  id = 1;
+  // select using WHERE and ORDER BY
   const rows = await tbl.select(
-    ["field"],
+    ["foo"], // empty array to select all fields *
     [
       {
-        key: "field",
-        value: "some value",
+        key: "id",
+        value: id,
         operator: "=", // default operator
         comparison: "AND" // default comparison
       }
@@ -65,4 +76,40 @@ Performing a SELECT operation (with WHERE and ORDER BY)
     'created', //orderby 
     'DESC' // default order
    );
+
+   // select one by id
+    const row = await tbl.selectOne(id);
+
+    // optionally specify the fields 
+    const row = await tbl.selectOne(id, ["foo"]);
+
+    // expect: [{foo: "bar"}];
+```
+
+Performing an UPDATE operation
+
+```javascript
+  id = 1; 
+  // update using WHERE
+  const result = await tbl.update({ foo: "bar"  }, [
+        { key: "id", value: id },
+      ]);
+
+  // update one by id
+  const result = await tbl.updateOne(id, { foo: "bar" });
+
+  // expect: result = true;
+```
+
+Performing a DELETE operation
+
+```javascript
+  id = 1; 
+  // delete using WHERE
+  const result = await tbl.delete([{ key: "id", value: id }]);
+
+  // delete one by id
+  const result = await tbl.deleteOne(id);
+
+  // expect: result = true;
 ```
