@@ -49,7 +49,7 @@ const tbl = new sql.Table(db, "example_tbl", {
 });
 ```
 
-Performing a SELECT operation
+Performing a SELECT operation (with WHERE and ORDER BY)
 
 ```javascript
   const rows = await tbl.select(

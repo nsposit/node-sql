@@ -12,6 +12,9 @@ const db = new sql.Database(
 
 //create table
 const tbl = new sql.Table(db, "member_tbl", {
+  id: {
+    type: "int"
+  },
   primary_email: {
     type: "varchar(75)",
   },
@@ -25,16 +28,16 @@ const tbl = new sql.Table(db, "member_tbl", {
 
 async function test() {
     try{
-        const rows = await tbl.select(['last_name'], [{
-          key: "verified_email",
-          value: 1
-        }, {
-          key: "primary_email",
-          value: "%.mil",
-          operator: "LIKE",
-          comparison: "AND"
-        }], 'last_name', 'ASC');
+      const {id} = await tbl.insert({primary_email: "testuser121320211447@mail1.mil" });
+
+        const rows = await tbl.select(['primary_email'], [{
+          key: "id",
+          value: id
+        }]);
         console.log(rows);
+
+        const result = await tbl.update({primary_email:  "testuser121320211447@mail2.mil"}, [{  key: "id",
+        value: id}]);
     }catch(ex){
         console.error(ex);
     }
