@@ -1,4 +1,4 @@
-# @nathaniel.sposit/sql
+# @nate.sposit/sql
 
 JavaScript interface for mySQL queries
 
@@ -6,7 +6,7 @@ JavaScript interface for mySQL queries
 
 ```bash
 # with npm
-npm install @nathaniel.sposit/sql
+npm install @nate.sposit/sql
 ```
 
 ## Usage
@@ -23,7 +23,7 @@ DB_NAME=example
 Connect to database and create a table model
 
 ```javascript
-const sql = require("@nathaniel.sposit/sql");
+const sql = require("@nate.sposit/sql");
 
 // create db connection
 const db = new sql.Database(

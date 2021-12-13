@@ -1,8 +1,7 @@
 {
-  "name": "@nathaniel.sposit/sql",
+  "name": "@nate.sposit/sql",
   "version": "1.0.0",
   "description": "Node package for mySQL",
-  "private": true,
   "main": "/lib/index.js",
   "directories": {
     "lib": "lib",
@@ -17,6 +16,9 @@
   },
   "author": "nathaniel.sposit",
   "license": "ISC",
+  "publishConfig": {
+    "@nate.sposit:registry": " https://code.survice.com/api/v4/projects/284/packages/npm/"
+  },
   "dependencies": {
     "joi": "^17.5.0",
     "mysql2": "^2.3.3"
