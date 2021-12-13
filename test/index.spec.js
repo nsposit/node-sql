@@ -1,5 +1,5 @@
 require("dotenv").config();
-const sql = require("../lib/index");
+const sql = require("../index");
 const showResult = false;
 
 // create db connection
