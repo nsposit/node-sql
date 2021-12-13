@@ -33,9 +33,24 @@ const db = new sql.Database(
   process.env.DB_NAME
 );
 
-// create table model
+// create table model 
 tableName = "foo"; 
 const tbl = new sql.Table(db, tableName, {
+  id: {
+    type: "int",
+    isPrimaryKey: true,
+    autoIncrement: true,
+  },
+  foo: {
+    type: "varchar(256)",
+  },
+  created: {
+    type: "datetime",
+  },
+});
+
+// create table model from instance of database 
+const tbl = db.table(tableName, {
   id: {
     type: "int",
     isPrimaryKey: true,

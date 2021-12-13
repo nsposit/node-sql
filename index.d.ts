@@ -13,6 +13,11 @@ export declare class Database {
 
   checkConnection(): Promise<boolean>;
   query(sql: string, values: any): Promise<[]>;
+  table(
+    name: string,
+    schema: Schema,
+    defaults?: defaults
+  ): Table;
   closePool(): Promise<void>;
 }
 
@@ -58,7 +63,7 @@ export interface Insert {
  */
 export declare class Table {
   constructor(
-    database: typeof Database,
+    database: Database,
     name: string,
     schema: Schema,
     defaults?: defaults
@@ -82,7 +87,7 @@ export declare class Table {
     order?: string,
     limit?: number,
     page?: number
-  ): Promise<typeof Object[]>;
+  ): Promise<Object[]>;
 
   /**
    * Builds and executes INSERT query.
@@ -90,7 +95,7 @@ export declare class Table {
    * @param {Object} obj Object of field value pairs to insert.
    * @return {Promise<Insert>} Insert object containing the id of the inserted row.
    */
-  insert(obj: typeof Object): Promise<Insert>;
+  insert(obj: Object): Promise<Insert>;
 
   /**
    * Builds and executes UPDATE query.
@@ -99,7 +104,7 @@ export declare class Table {
    * @param {Where[]} where List of Where objects to filter the query. Where object contain required 'key' and 'value' properties and optional 'operator' and 'comparison' properties. The 'operator' propery has a default value of '=' and accepts '>', '>=', '<', '!=', '<=', 'LIKE', 'NOT LIKE', 'REGEXP', 'NOT REGEXP'. The 'comparison' property has a default value of 'AND' and accepts 'OR', 'XOR'.
    * @return {Promise<boolean>} Returns true on successful update.
    */
-  update(obj: typeof Object, where?: Where[]): Promise<boolean>;
+  update(obj: Object, where?: Where[]): Promise<boolean>;
 
   /**
    * Builds and executes DELETE query.
@@ -114,9 +119,9 @@ export declare class Table {
    *
    * @param {number} id
    * @param {string[]} fields List of the fields to select. Selects all fields if empty.
-   * @return {Promise<typeof Object>} Selected row.
+   * @return {Promise<Object>} Selected row.
    */
-  selectOne(id: number, fields?: string[]): Promise<typeof Object>;
+  selectOne(id: number, fields?: string[]): Promise<Object>;
 
   /**
    * Updates a single row by id.
@@ -125,9 +130,9 @@ export declare class Table {
    * @param {Object} obj Object of field value pairs to update.
    * @return {Promise<boolean>} Returns true on successful update.
    */
-  updateOne(id: number, obj: typeof Object): Promise<boolean>;
+  updateOne(id: number, obj: Object): Promise<boolean>;
 
-   /**
+  /**
    * Deletes a single row by id.
    *
    * @param {number} id

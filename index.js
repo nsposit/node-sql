@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const mysql = require("mysql2/promise");
 
@@ -93,6 +93,14 @@ class Database {
     }
   }
 
+  table(
+    name,
+    schema,
+    defaults = { limit: 10, page: 1, order: "DESC", orderby: "" }
+  ) {
+    return new Table(this, name, schema, defaults);
+  }
+
   async closePool() {
     try {
       this.pool.end();
@@ -102,7 +110,6 @@ class Database {
     }
   }
 }
-
 
 class Table {
   database;
@@ -382,12 +389,12 @@ class Table {
 
   async deleteOne(id) {
     try {
-     return await this.delete([
-      {
-        key: "id",
-        value: id,
-      },
-    ]);
+      return await this.delete([
+        {
+          key: "id",
+          value: id,
+        },
+      ]);
     } catch (ex) {
       console.error("Error: ", ex);
       throw ex;

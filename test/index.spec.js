@@ -10,8 +10,7 @@ const db = new sql.Database(
   process.env.DB_NAME
 );
 
-//create table
-const tbl = new sql.Table(db, "member_tbl", {
+const tbl = db.table("member_tbl", {
   id: {
     type: "int",
   },
@@ -23,8 +22,23 @@ const tbl = new sql.Table(db, "member_tbl", {
   },
   last_name: {
     type: "varchar(40)",
-  },
-});
+  },});
+
+//create table
+// const tbl = new sql.Table(db, "member_tbl", {
+//   id: {
+//     type: "int",
+//   },
+//   primary_email: {
+//     type: "varchar(75)",
+//   },
+//   verified_email: {
+//     type: "tinyint(1)",
+//   },
+//   last_name: {
+//     type: "varchar(40)",
+//   },
+// });
 
 // init test users
 const timestamp = Date.now();
