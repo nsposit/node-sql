@@ -20,7 +20,6 @@
     "@nate.sposit:registry": " https://code.survice.com/api/v4/projects/284/packages/npm/"
   },
   "dependencies": {
-    "joi": "^17.5.0",
     "mysql2": "^2.3.3"
   },
   "devDependencies": {
