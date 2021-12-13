@@ -18,11 +18,36 @@ const tbl = new sql.Table(db, "member_tbl", {
   verified_email: {
     type: "tinyint(1)",
   },
+  last_name: {
+    type: 'varchar(40)'
+  }
 });
 
-async function testFind() {
+async function test() {
+    try{
+        const rows = await tbl.select(['last_name'], [{
+          key: "verified_email",
+          value: 1
+        }, {
+          key: "primary_email",
+          value: "%.mil",
+          operator: "LIKE",
+          comparison: "AND"
+        }], 'last_name', 'ASC');
+        console.log(rows);
+    }catch(ex){
+        console.error(ex);
+    }
+
+}
+
+test(); 
+
+
+
+async function testFind(args) {
   try {
-    const rows = await tbl.find();
+    const rows = await tbl.find(args);
     if (!rows) return false;
     if (showResult) console.log(rows);
     return true;
@@ -30,6 +55,7 @@ async function testFind() {
     console.error("Error: ", ex);
     return false;
   }
+
 }
 
 async function testFindWhere(key, value) {
@@ -157,7 +183,7 @@ async function run() {
   try {
     // find users
     console.log("Starting unit test 'find users'...");
-    const usersFound = await testFind();
+    const usersFound = await testFind({});
     if (!usersFound) {
       console.error("Unit test 'find users' failed.");
       return;
@@ -288,4 +314,4 @@ async function run() {
   }
 }
 
-run();
+// run();
