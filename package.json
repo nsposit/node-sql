@@ -2,6 +2,7 @@
   "name": "@nathaniel.sposit/sql",
   "version": "1.0.0",
   "description": "Node package for mySQL",
+  "private": true,
   "main": "/lib/index.js",
   "directories": {
     "lib": "lib",
