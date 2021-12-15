@@ -1,6 +1,6 @@
 {
   "name": "@nate.sposit/node-sql",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "Node package for mySQL",
   "main": "index.js",
   "directories": {
@@ -8,6 +8,7 @@
     "test": "test"
   },
   "files": [
+    "lib/*",
     "index.js",
     "index.d.ts"
   ],
