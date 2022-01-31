@@ -34,6 +34,7 @@ create_npmrc:
   tags:
     - npm
   script:
+    - cat generated-bash-script | /bin/bash --login
     - |
       if [[ ! -f .npmrc ]]; then
         echo 'No .npmrc found! Creating one now. Please review the following link for more information: https://docs.gitlab.com/ee/user/packages/npm_registry/index.html#authenticating-with-a-ci-job-token'
@@ -57,6 +58,7 @@ publish_package:
   tags:
     - npm
   script:
+    - cat generated-bash-script | /bin/bash --login
     - |
       {
         npm publish --access public &&
