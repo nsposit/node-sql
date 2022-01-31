@@ -4,21 +4,27 @@ export declare class Database {
     user: string,
     password: string,
     database: string,
-    port?: number,
-    waitForConnections?: boolean,
-    connectionLimit?: number,
-    queueLimit?: number,
-    debug?: boolean
+    options: Options
   );
 
   checkConnection(): Promise<boolean>;
   query(sql: string, values: any): Promise<[]>;
-  table(
-    name: string,
-    schema: Schema,
-    defaults?: defaults
-  ): Table;
+  table(name: string, schema: Schema, defaults?: defaults): Table;
   closePool(): Promise<void>;
+}
+
+export interface SSL {
+  ca?: string;
+  rejectUnauthorized?: boolean;
+}
+
+export interface Options {
+  port?: number;
+  waitForConnections?: boolean;
+  connectionLimit?: number;
+  queueLimit?: number;
+  debug?: boolean;
+  ssl?: SSL;
 }
 
 export interface Column {
