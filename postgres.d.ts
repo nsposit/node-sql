@@ -20,10 +20,15 @@ export interface SSL {
 
 export interface Options {
   port?: number;
-  waitForConnections?: boolean;
-  connectionLimit?: number;
-  queueLimit?: number;
-  debug?: boolean;
+  types?: any, // custom type parsers
+  statement_timeout?: number, // number of milliseconds before a statement in query will time out, default is no timeout
+  query_timeout?: number, // number of milliseconds before a query call will timeout, default is no timeout
+  application_name?: string, // The name of the application that created this Client instance
+  connectionTimeoutMillis?: number, // number of milliseconds to wait for connection, default is no timeout
+  idle_in_transaction_session_timeout?: number   
+  idleTimeoutMillis?: number, // number of milliseconds to wait before timing out when connecting a new client
+  max?: number,  // maximum number of clients the pool should contain
+  allowExitOnIdle?: boolean
   ssl?: SSL;
 }
 

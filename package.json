@@ -21,10 +21,10 @@
   },
   "author": "nathaniel.sposit",
   "license": "ISC",
-  "publishConfig": {
-  },
+  "publishConfig": {},
   "dependencies": {
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "pg": "^8.7.3"
   },
   "devDependencies": {
     "dotenv": "^10.0.0",

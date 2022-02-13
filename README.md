@@ -1,17 +1,17 @@
 # @nate.sposit/node-sql
 
-JavaScript interface for mySQL queries
+JavaScript interface for mySQL and postgreSQL
 
 ## Install
 
 ```bash
 # with npm
-npm install @nate.sposit/node-sql
+npm install @nate.sposit/node-sql --save
 ```
 
 ## Usage
 
-Create .env file in the root directory
+Set the environment variabes
 
 ```dosini
 DB_HOST=localhost
@@ -20,10 +20,21 @@ DB_PASS=toor
 DB_NAME=example
 ```
 
+Require mySQL
+
+```javascript
+const sql = require("@nate.sposit/node-sql/mysql");
+```
+
+Require postgreSQL
+
+```javascript
+const sql = require("@nate.sposit/node-sql/postgres");
+```
+
 Connect to database and create a table model
 
 ```javascript
-const sql = require("@nate.sposit/node-sql");
 
 // create db connection
 const db = new sql.Database(
@@ -49,6 +60,7 @@ const tbl = new sql.Table(db, tableName, {
   },
 });
 
+// *** preferred method ***
 // create table model from instance of database 
 const tbl = db.table(tableName, {
   id: {
@@ -128,3 +140,8 @@ Performing a DELETE operation
 
   // expect: result = true;
 ```
+## Planned Future Functionality
+* Add pre-query input value validation
+* Add extended support for running pools and rollbacks
+* Add support for running stored procedures
+* Add support for database initialization and migrations
