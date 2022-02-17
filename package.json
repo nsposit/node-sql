@@ -1,6 +1,6 @@
 {
   "name": "@nate.sposit/node-sql",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Node package for mySQL",
   "main": "index.js",
   "directories": {
@@ -10,7 +10,11 @@
   "files": [
     "lib/*",
     "index.js",
-    "index.d.ts"
+    "index.d.ts",
+    "mysql.js",
+    "mysql.d.ts",
+    "postgres.js",
+    "postgres.d.ts"
   ],
   "scripts": {
     "test": "jest --detectOpenHandles"
