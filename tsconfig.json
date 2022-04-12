@@ -7,6 +7,6 @@
       "outFile": "./built/local/tsc.js",
       "sourceMap": true
     },
-    "include": ["index.js","index.d.ts"],
+    "include": ["index.js","index.d.ts","mysql.js","mysql.d.ts","postgres.js","postgres.d.ts", ],
     "exclude": ["node_modules"]
   }
