@@ -8,7 +8,7 @@ const db = new sql.Database(
   process.env.DB_USER,
   process.env.DB_PASS,
   process.env.DB_NAME,
-  { ssl: false }
+  {port:3306, ssl: false }
 );
 
 const tbl = db.table("member_tbl", {
@@ -65,6 +65,14 @@ describe("core", () => {
       expect(rows[0].primary_email).toEqual(user1.primary_email);
     
   });
+
+test("selectCount", async () => {
+    const rows = await tbl.selectCount(
+      []
+    );
+    expect(rows.length).toEqual(1);
+  
+});
 
   test("update", async () => {
     
