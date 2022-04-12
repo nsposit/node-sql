@@ -75,6 +75,16 @@ export declare class Table {
     defaults?: defaults
   );
 
+   /**
+   * Builds and executes SELECT query and returns the COUNT.
+   *
+   * @param {Where[]} where List of Where objects to filter the query. Where object contain required 'key' and 'value' properties and optional 'operator' and 'comparison' properties. The 'operator' propery has a default value of '=' and accepts '>', '>=', '<', '!=', '<=', 'LIKE', 'NOT LIKE', 'REGEXP', 'NOT REGEXP'. The 'comparison' property has a default value of 'AND' and accepts 'OR', 'XOR'.
+   * @return {Promise<[]>} A list of rows that match the query.
+   */
+     selectCount(
+      where?: Where[],
+    ): Promise<Object[]>;
+
   /**
    * Builds and executes SELECT query.
    *
