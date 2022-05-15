@@ -8,7 +8,7 @@ const db = new sql.Database(
   process.env.DB_USER,
   process.env.DB_PASS,
   process.env.DB_NAME,
-  {port:3306,ssl: false}
+  { port: 3306, ssl: false }
 
 );
 
@@ -27,7 +27,8 @@ const tbl = db.table("member_tbl", {
   },
   last_name: {
     type: "varchar(40)",
-  },});
+  },
+});
 
 //create table
 // const tbl = new sql.Table(db, "member_tbl", {
@@ -55,7 +56,7 @@ describe("core", () => {
 
   beforeAll(async () => {
     await db.query(`CREATE SCHEMA IF NOT EXISTS test;`);
-
+    
     await db.query(`CREATE TABLE IF NOT EXISTS test.member_tbl (
       id INT AUTO_INCREMENT,
       primary_email VARCHAR(75),
@@ -66,24 +67,47 @@ describe("core", () => {
   });
 
   test("insert", async () => {
-      const { id } = await tbl.insert({ primary_email: user1.primary_email });
-      user1.id = id;
-      expect(id).toBeTruthy();
-    
+    const { id } = await tbl.insert({ primary_email: user1.primary_email });
+    user1.id = id;
+    expect(id).toBeTruthy();
+
+  });
+
+  test("insert", async () => {
+    const { id } = await tbl.insert({ primary_email: user3.primary_email });
+    user3.id = id;
+    expect(id).toBeTruthy();
+
   });
 
   test("select", async () => {
-      const rows = await tbl.select(
-        ["primary_email"],
-        [
-          {
-            key: "id",
-            value: user1.id,
-          },
-        ]
-      );
-      expect(rows[0].primary_email).toEqual(user1.primary_email);
-    
+    const rows = await tbl.select(
+      ["primary_email"],
+      [
+        {
+          key: "id",
+          value: user1.id,
+        },
+      ]
+    );
+    expect(rows[0].primary_email).toEqual(user1.primary_email);
+
+  });
+
+  test("select (IN)", async () => {
+    const rows = await tbl.select(
+      ["primary_email"],
+      [
+        {
+          key: "id",
+          value: [user1.id, user3.id],
+          operator: "IN"
+        },
+      ]
+    );
+    expect(rows[0].primary_email).toEqual(user1.primary_email);
+    expect(rows[1].primary_email).toEqual(user3.primary_email);
+
   });
 
   test("selectCount", async () => {
@@ -91,48 +115,61 @@ describe("core", () => {
       []
     );
     expect(rows.length).toEqual(1);
-  
-});
+
+  });
+
+  test("selectCount (IN)", async () => {
+    const rows = await tbl.selectCount(
+      [{
+        key: "id",
+        value: [user1.id, user3.id],
+        operator: "IN"
+      },],
+    );
+    expect(rows.length).toEqual(1);
+    expect(rows[0]).toHaveProperty('count', 2);
+
+  });
 
   test("update", async () => {
-      const result = await tbl.update({ verified_email: 1 }, [
-        { key: "id", value: user1.id },
-      ]);
-      expect(result).toBeTruthy();
-    
+    const result = await tbl.update({ verified_email: 1 }, [
+      { key: "id", value: user1.id },
+    ]);
+    expect(result).toBeTruthy();
+
   });
 
   test("delete", async () => {
-      const result = await tbl.delete([{ key: "id", value: user1.id }]);
-      expect(result).toBeTruthy();
-    
+    const result = await tbl.delete([{ key: "id", value: user1.id }]);
+    expect(result).toBeTruthy();
+
   });
 });
 
 describe("singletons", () => {
   test("insert", async () => {
-      const { id } = await tbl.insert({ primary_email: user2.primary_email });
-      user2.id = id;
-      expect(id).toBeTruthy();
-    
+    const { id } = await tbl.insert({ primary_email: user2.primary_email });
+    user2.id = id;
+    expect(id).toBeTruthy();
+
   });
 
   test("selectOne", async () => {
-      const row = await tbl.selectOne(user2.id, ["primary_email"]);
-      expect(row.primary_email).toEqual(user2.primary_email);
-    
+    const row = await tbl.selectOne(user2.id, ["primary_email"]);
+    expect(row.primary_email).toEqual(user2.primary_email);
+
   });
 
   test("updateOne", async () => {
-      const result = await tbl.updateOne(user2.id, { verified_email: 1 });
-      expect(result).toBeTruthy();
-    
+    const result = await tbl.updateOne(user2.id, { verified_email: 1 });
+    expect(result).toBeTruthy();
+
   });
 
   test("deleteOne", async () => {
-      const result = await tbl.deleteOne(user2.id);
-      expect(result).toBeTruthy();
-    
+    const result = await tbl.deleteOne(user2.id);
+    expect(result).toBeTruthy();
+
   });
 
   afterAll(async () => {
