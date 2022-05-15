@@ -50,7 +50,7 @@ export interface defaults {
 
 export interface Where {
   key: string;
-  value: string;
+  value: string | string[];
   operator?: string;
   comparison?: string;
 }

@@ -35,7 +35,7 @@ let user2 = { id: 2, primary_email: `testuser${timestamp}@mail2.mil` };
 describe("core", () => {
 
   beforeAll(async () => {
-    await db.query(`CREATE SCHEMA IF NOT EXISTS test;`);
+    await db.query(`CREATE DATABASE test;`);
 
     await db.query(`CREATE TABLE IF NOT EXISTS test.member_tbl (
       id serial PRIMARY KEY,
